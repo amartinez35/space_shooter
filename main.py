@@ -1,5 +1,10 @@
 import pygame
 from game import Game
+import os
+
+x = 150
+y = 30
+os.environ['SDL_VIDEO_WINDOW_POS'] = "%d,%d" % (x,y)
 
 pygame.init()
 
@@ -45,11 +50,5 @@ while(running):
             game.pressed[event.key] = True
         elif event.type == pygame.KEYUP:
             game.pressed[event.key] = False
-            # if event.key == pygame.K_UP:
-            #     print('vers le haut')
-            #     game.player.move_up()
-            # elif event.key == pygame.K_DOWN:
-            #     print('vers le bas')
-            #     game.player.move_down()
 
               

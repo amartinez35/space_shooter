@@ -1,4 +1,5 @@
 import pygame
+from projectile import Projectile
 
 class Player(pygame.sprite.Sprite):
 
@@ -10,10 +11,11 @@ class Player(pygame.sprite.Sprite):
         self.image[0] = pygame.image.load('assets/spaceship.png')
         self.image[1] = pygame.image.load('assets/spaceship_2.png')
         self.attack = 10
-        self.velocity = 5
+        self.velocity = 7
         self.rect = self.image[0].get_rect()        
         self.rect.y = 250
         self.rect.x = 20
+        self.all_projectiles = pygame.sprite.Group()
     
     def move_down(self):
         self.rect.y += self.velocity
@@ -31,3 +33,4 @@ class Player(pygame.sprite.Sprite):
         pygame.mixer.init()
         pygame.mixer.music.load('assets/tire.mp3')
         pygame.mixer.music.play()
+        self.all_projectiles.add(Projectile(self))

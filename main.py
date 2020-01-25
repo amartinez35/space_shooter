@@ -28,7 +28,13 @@ while(running):
     
     screen.blit(background, (-100, 0))
     screen.blit(game.player.image[test], game.player.rect)
-    pygame.display.flip()
+
+    for projectile in game.player.all_projectiles:
+        projectile.move()
+
+    game.player.all_projectiles.draw(screen)
+
+
 
     if game.pressed.get(pygame.K_UP) and game.player.rect.y > 0:
         game.player.move_up()
@@ -39,15 +45,21 @@ while(running):
     elif game.pressed.get(pygame.K_RIGHT) and game.player.rect.x < (screen.get_width() - game.player.rect.width):
         game.player.move_right()
     
-    if game.pressed.get(pygame.K_SPACE):
-        game.player.shot()
+    # if game.pressed.get(pygame.K_SPACE):
+    #     game.player.shot()
         
+    pygame.display.flip()
+
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
             pygame.quit()
         elif event.type == pygame.KEYDOWN:
             game.pressed[event.key] = True
+
+            if event.key == pygame.K_SPACE:
+                game.player.shot()
+
         elif event.type == pygame.KEYUP:
             game.pressed[event.key] = False
 

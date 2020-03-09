@@ -20,14 +20,14 @@ game = Game()
 test = 0
 
 while(running):
-
-    if test == 0:
-        test = 1
-    else:
-        test = 0
     
     screen.blit(background, (-100, 0))
-    screen.blit(game.player.image[test], game.player.rect)
+    screen.blit(game.player.image, game.player.rect)
+
+    for monster in game.all_monsters:
+        screen.blit(monster.image, monster.rect)
+        monster.forward()
+
 
     for projectile in game.player.all_projectiles:
         projectile.move()

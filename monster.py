@@ -19,6 +19,9 @@ class Monstre(pygame.sprite.Sprite):
     def forward(self):
         if not self.game.check_collision(self, self.game.player.all_projectiles):
             self.rect.x -= self.velocity
+        else:
+            print('touché')
     
     def update_health_bar(self):
         print('test')
+

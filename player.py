@@ -18,6 +18,22 @@ class Player(pygame.sprite.Sprite):
         self.all_projectiles = pygame.sprite.Group()
         self.game = game
     
+    def damage(self, amount):
+        self.health -= amount
+        if self.health <= 0:
+            print('toto')
+
+    def update_health_bar(self, surface):
+        #def couleur
+        bar_color = (111, 210, 4)
+        bar_color_background = (151, 151, 151)
+        #position de la bar
+        bar_position = [10, 10, self.health, 10]
+        bar_position_background = [10, 10, self.health_max, 10]
+        #dessin de la bar
+        pygame.draw.rect(surface, bar_color_background, bar_position_background)
+        pygame.draw.rect(surface, bar_color, bar_position)
+    
     def move_down(self):
         self.rect.y += self.velocity
     
@@ -25,11 +41,11 @@ class Player(pygame.sprite.Sprite):
         self.rect.y -= self.velocity
 
     def move_left(self):
-        self.test()
         self.rect.x -= self.velocity
     
     def move_right(self):
-        self.rect.x += self.velocity
+        if not self.game.check_collision(self, self.game.all_monsters):
+            self.rect.x += self.velocity
             
     def shot(self):
         pygame.mixer.init()

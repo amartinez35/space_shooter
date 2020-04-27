@@ -24,16 +24,21 @@ while(running):
     screen.blit(background, (-100, 0))
     screen.blit(game.player.image, game.player.rect)
 
-    for monster in game.all_monsters:
-        screen.blit(monster.image, monster.rect)
-        monster.forward()
+    game.player.update_health_bar(screen)
 
+    # for monster in game.all_monsters:
+    #     screen.blit(monster.image, monster.rect)
+    #     monster.forward()
+
+    for monster in game.all_monsters:
+        monster.forward()
+        monster.update_health_bar(screen)
 
     for projectile in game.player.all_projectiles:
         projectile.move()
 
     game.player.all_projectiles.draw(screen)
-
+    game.all_monsters.draw(screen)
 
 
     if game.pressed.get(pygame.K_UP) and game.player.rect.y > 0:
